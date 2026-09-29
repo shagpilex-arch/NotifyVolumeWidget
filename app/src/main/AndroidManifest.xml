@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Declared, but never requested by this app: on most phones,
+         changing notification volume alone needs no permission at all. A
+         minority of phones link notification volume to Do Not Disturb, and
+         on those, changing it can require this - see the README. Declaring
+         it (with no other action) only makes the app show up in Settings →
+         Notifications → Special app access → Do Not Disturb access, so a
+         user who hits that case has a way to fix it themselves. -->
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <!-- The widget itself. Must be exported: this is how the system
+             delivers APPWIDGET_UPDATE and other lifecycle broadcasts to it.
+             It only renders the UI; it never touches audio settings itself. -->
+        <receiver
+            android:name=".VolumeWidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
+
+        <!-- Handles the actual volume changes. Deliberately NOT exported:
+             only this app's own PendingIntents (created in
+             VolumeWidgetProvider) can reach it, so another installed app
+             cannot broadcast these actions directly and change the volume
+             without the user tapping the widget. No intent-filter is needed
+             since it's only ever targeted explicitly. -->
+        <receiver
+            android:name=".VolumeActionReceiver"
+            android:exported="false" />
+
+    </application>
+</manifest>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Notif Volume</string>
+    <string name="off">Off</string>
+    <string name="off_description">Turn notification volume off</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+    <string name="decrease_volume">Decrease notification volume</string>
+    <string name="increase_volume">Increase notification volume</string>
+    <string name="volume_description">Notification volume: %1$s</string>
+    <string name="widget_description">One button for 0% notification volume, and a stepper in 10% steps. No other options.</string>
+
+    <!-- Shown only on the small number of phones where the OS links
+         notification volume to Do Not Disturb (see README) -->
+    <string name="volume_ignored">Volume unchanged - this phone may need Do Not Disturb access for this (Settings → Notifications → Special app access).</string>
+</resources>

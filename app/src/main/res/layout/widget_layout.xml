@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@drawable/widget_background">
+
+    <!-- Row 1: single "Off" button, straight to 0% notification volume.
+         A plain TextView (not <Button>) with an explicit background, so its
+         text is reliably centered regardless of launcher/OEM button theming -
+         see widget_button_bg.xml. -->
+    <TextView
+        android:id="@+id/btn_off"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/off"
+        android:contentDescription="@string/off_description"
+        android:textSize="13sp"
+        android:textColor="#FFFFFFFF"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="@drawable/widget_button_bg" />
+
+    <!-- Row 2: notification volume stepper, in fixed 10% increments. Widgets
+         cannot host a drag-controlled slider (RemoteViews only supports
+         tap-driven controls), so this minus / bar / plus control does the
+         same job by taps. -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/btn_vol_down"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="@string/minus"
+            android:contentDescription="@string/decrease_volume"
+            android:textSize="16sp"
+            android:textColor="#FFFFFFFF"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:background="@drawable/widget_button_bg" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp">
+
+            <ProgressBar
+                android:id="@+id/progress_volume"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:max="100"
+                android:progress="50" />
+
+            <TextView
+                android:id="@+id/txt_volume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="10sp"
+                android:includeFontPadding="false"
+                android:textColor="#FFFFFFFF"
+                android:text="50%" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/btn_vol_up"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="@string/plus"
+            android:contentDescription="@string/increase_volume"
+            android:textSize="16sp"
+            android:textColor="#FFFFFFFF"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:background="@drawable/widget_button_bg" />
+    </LinearLayout>
+
+</LinearLayout>
